@@ -11,16 +11,36 @@
    Filename:   ph_clock.js     
 
 */
-var minsLeft = 0;
-var secsLeft = 15;
+//These variables set up how much time is left to place the order by giving the amount of minutes/seconds left a number value and calculating the time left with the equation below.
+var minsLeft = 30;
+var secsLeft = 0;
 var timeLeft = (minsLeft * 60) + secsLeft;
-
-function Countdown() {
+//This variable runs the coutdown function every second.
+var clockID = setInterval("countdown()", 1000);
+//this function calculates the number of minutes/seconds left as well as display the times in the docuement.
+function countdown() {
     minsLeft = Math.floor(timeLeft / 60);
     secsLeft = timeLeft - (minsLeft * 60);
+
+    var minsString = addLeadingZero(minsLeft);
+
+    var secsString = addLeadingZero(secsLeft);
+
+    document.getElementById("minutes").innerHTML = minsString;
+
+    document.getElementById("seconds").innerHTML = secsString;
+
+    checkTimer();
+
+
+    timeLeft--;
+}
+//This function notifies the user when the amount of time to place the order has run out by diplaying text and it also stops the counter when time is up.
+function stopClock() {
+    document.getElementById("TimeHead").insertAdjacentHTML('beforeend', "<br /> (Order Expired)");
+    clearInterval(clockID);
 }
 
-var minString = numStr;
 
 
 
